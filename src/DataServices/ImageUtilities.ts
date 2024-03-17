@@ -4,6 +4,7 @@ import dragonTypeImg from '../assets/elementTypes/dragon.png'
 import electricTypeImg from '../assets/elementTypes/electric.png'
 import fairyTypeImg from '../assets/elementTypes/fairy.png'
 import fightingTypeImg from '../assets/elementTypes/fighting.png'
+import fireTypeImg from '../assets/elementTypes/fire.png'
 import flyingTypeImg from '../assets/elementTypes/flying.png'
 import ghosetTypeImg from '../assets/elementTypes/ghost.png'
 import grassTypeImg from '../assets/elementTypes/grass.png'
@@ -26,6 +27,7 @@ const imageKey = {
     electric: electricTypeImg,
     fairy: fairyTypeImg,
     fighting: fightingTypeImg,
+    fire: fireTypeImg,
     flying: flyingTypeImg,
     ghost: ghosetTypeImg,
     grass: grassTypeImg,

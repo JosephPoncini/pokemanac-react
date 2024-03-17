@@ -13,7 +13,7 @@ interface PokemonComponentProps {
 const PokemonComponent = (props: PokemonComponentProps) => {
 
     return (
-        <div className="flex flex-col justify-end" onClick={()=>props.ClickHandle(props.Sprite.name)}>
+        <div className="flex flex-col justify-end cursor-pointer" onClick={()=>props.ClickHandle(props.Sprite.name)}>
             <div><img className="w-[75px]" src={props.Sprite.sprite} alt="pokemon sprite" /></div>
             <div className="flex justify-center">{toTitleCase(props.Sprite.name)}</div>
         </div>

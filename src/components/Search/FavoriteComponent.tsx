@@ -2,6 +2,7 @@ import { IconButton } from '@material-tailwind/react'
 import React from 'react'
 import { getlocalStorage } from '../../DataServices/LocalSotrage'
 import { FavoriteComponentProps } from '../../interfaces/IFavoriteComponent';
+import { toTitleCase } from '../../DataServices/Utilities';
 
 
 const FavoriteComponent = (props: FavoriteComponentProps) => {
@@ -14,15 +15,18 @@ const FavoriteComponent = (props: FavoriteComponentProps) => {
 
                 let nameIdArray = favorite.split(",");
                 if (nameIdArray.length > 0) {
+                    console.log(nameIdArray)
                     let name = nameIdArray[0];
                     let id = nameIdArray[1];
-
                     return (
-                        <div className="favoriteExample flex justify-between border-black border-t-2 px-2">
-                            <div onClick={() => props.onClickSearch} className="fpokemon">{name}</div>
-                            <div onClick={() => props.onClickSearch} className="fpokemonId">#{id}</div>
+                        <div className="flex justify-between border-black border-t-2 px-2 ">
+                            <div className='cursor-pointer flex justify-between items-center w-[87%]'>
+                                <div onClick={() => props.onClickSearch(name)} className=" font-content text-black">{toTitleCase(name)}</div>
+                                <div onClick={() => props.onClickSearch(name)} className=" font-content text-black">#{id}</div>
+                            </div>
+
                             {/* <strong className="exit text-red-600">X</strong> */}
-                            <IconButton variant="text" color="blue-gray" onClick={() => props.onClickDelete} placeholder={undefined}>
+                            <IconButton variant="text" color="blue-gray" onClick={() => props.onClickDelete(name + "," + id)} placeholder={undefined}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"

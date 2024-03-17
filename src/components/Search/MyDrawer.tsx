@@ -26,7 +26,7 @@ export function MyDrawer(props:MyDrawerProps) {
       <button className="redBtn" onClick={openDrawer} >Favorites</button>
       <Drawer open={open} onClose={closeDrawer} className="p-4" placeholder={undefined}>
         <div className="mb-6 flex items-center justify-between">
-          <Typography variant="h5" color="blue-gray" placeholder={undefined}>
+          <Typography className="font-content" variant="h4" color="blue-gray" placeholder={undefined}>
             Favorites
           </Typography>
           <IconButton variant="text" color="blue-gray" onClick={closeDrawer} placeholder={undefined}>
@@ -46,9 +46,8 @@ export function MyDrawer(props:MyDrawerProps) {
             </svg>
           </IconButton>
         </div>
-        <div id="favoritesContainer" className="border-black border-b-2">
           <FavoriteComponent onClickDelete={props.favoriteComponentProps.onClickDelete}  onClickSearch={props.favoriteComponentProps.onClickSearch} />
-        </div>
+
 
       </Drawer>
     </React.Fragment>

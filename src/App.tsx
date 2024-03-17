@@ -52,6 +52,8 @@ function App() {
   const [movesText, setMovesText] = useState<string>("");
   const [types, setTypes] = useState<elementType[]>([{ element: "", elementUrl: "", elementKey: 0 }]);
 
+  const [favoritesArray, setFavoritesArray] = useState<string[]>(getlocalStorage())
+
   const changeShiny = () => {
     if (isShiny) {
       setIsShiny(false);
@@ -67,10 +69,12 @@ function App() {
       setisHeart(false);
       setHeart(heartEmpty);
       removeFromLocalStorage(pokemonName + "," + pokemonID)
+      setFavoritesArray(getlocalStorage());
     } else {
       setisHeart(true);
       setHeart(heartFilled);
       saveToLocalStorage(pokemonName + "," + pokemonID)
+      setFavoritesArray(getlocalStorage());
     }
   }
 
@@ -87,8 +91,9 @@ function App() {
     setSearchValue(search)
   }
 
-  const deleteFavorite = () => {
-
+  const deleteFavorite = (pokemon : string) => {
+    removeFromLocalStorage(pokemon);
+    setFavoritesArray(getlocalStorage());
   }
 
   //Load out List
@@ -153,10 +158,15 @@ function App() {
       let favorites: string[] = getlocalStorage();
       if(favorites.includes(pokemonName + "," + pokemonID)){
         setHeart(heartFilled);
+        setisHeart(true);
       }else{
         setHeart(heartEmpty);
+        setisHeart(false);
       }
   },[pokemonName])
+
+  useEffect(() => {
+  },[favoritesArray])
 
   const favoriteComponentPropHandles:FavoriteComponentProps = {
     onClickDelete: deleteFavorite,
