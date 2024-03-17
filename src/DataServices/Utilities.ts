@@ -24,7 +24,7 @@ export const GetEvoChain = async (evoChainData: IPokemonEvolutionChainApi, isShi
 
     const evoChainArray = await GetEvoLine(firstChain, evoChain, 0, 0, isShiny)
     evoChainArray.pop();
-    // console.log(evoChainArray);
+    console.log(evoChainArray);
     return evoChainArray;
 }
 
@@ -34,24 +34,12 @@ export const GetEvoLine = async (evoLineData: EvolutionChain, evoChain: IPokemon
     const getSprite = async (name: string, isShiny: boolean) => {
 
         const data = await pokemonApi(name);
-        //if I want to do the gifs I can switch the commented out
-
-        // let sprite = data.sprites.other["showdown"].front_default;
-        // if (isShiny) {
-        //     sprite = data.sprites.other["showdown"].front_shiny;
-        // } 
 
         let sprite = data.sprites.other["official-artwork"].front_default;
         if (isShiny) {
             sprite = data.sprites.other["official-artwork"].front_shiny;
         } 
 
-        // if(!sprite){
-        //     sprite = data.sprites.other["official-artwork"].front_default;
-        //     if (isShiny) {
-        //         sprite = data.sprites.other["official-artwork"].front_shiny;
-        //     }  
-        // }
         return sprite
     }
 

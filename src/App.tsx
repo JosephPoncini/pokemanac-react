@@ -104,6 +104,7 @@ function App() {
       // console.log(pokemonData);
 
       setPokemonEvoChain(await GetEvoChain(pokemonEvoChainData, isShiny))
+      
 
       setCurrentPokemonData(pokemonData);
       setCurrentPokemonEvoData(pokemonEvoChainData);
