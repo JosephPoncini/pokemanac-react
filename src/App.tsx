@@ -101,7 +101,7 @@ function App() {
       const pokemonSpeciesData = await pokemonSpeciesApi(searchValue.toLowerCase());
       const pokemonEvoChainData = await pokemonEvolutionChainApi(pokemonSpeciesData.evolution_chain.url)
       const pokemonEncounterData = await pokemonEncounterApi(searchValue.toLowerCase())
-      console.log(pokemonData);
+      // console.log(pokemonData);
 
       setPokemonEvoChain(await GetEvoChain(pokemonEvoChainData, isShiny))
 
@@ -124,7 +124,7 @@ function App() {
       setMovesText(GetMoves(pokemonData))
       setTypes(GetTypes(pokemonData))
     }
-    console.log(searchInput)
+    // console.log(searchInput)
     if (searchInput) {
       getData();
     }
