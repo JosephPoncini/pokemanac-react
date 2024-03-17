@@ -30,7 +30,7 @@ const SearchComponent = (props:searchProps) => {
             <h2 className="text-2xl ">
                 Choose a Pokémon...
             </h2>
-            <input id="search" className="ring-0" onChange={(e)=> props.onChangeHandle(e.target.value)} value={props.value} onKeyDown={handleKeyDown}></input>
+            <input id="search" className="ring-0" onChange={(e)=> props.onChangeHandle(e.target.value)} value={props.value} onKeyDown={handleKeyDown}/>
 
             <div className="buttons flex justify-center items-center flex-col lg:flex-row space-y-8 lg:space-y-0">
                 <div>

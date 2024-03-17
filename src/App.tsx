@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Button } from 'flowbite-react';
+
 import MainCardComponent from './components/MainCard/MainCardComponent';
 import DescriptionAndEvolutionsComponent from './components/DescriptionAndEvolutions/DescriptionAndEvolutionsComponent';
 import StatsComponent from './components/Stats/StatsComponent';
@@ -14,18 +13,16 @@ import shinyEmpty from "./assets/Sparkle.png";
 import shinyFilled from "./assets/SparkleShiny.png";
 import heartEmpty from "./assets/Heart.png";
 import heartFilled from "./assets/HeartFilled.png";
-import { EvolutionChain, IPokemonEvolutionChainApi } from './interfaces/IPokemonEvolutionChainApi';
-import { IPokemonSprite, IPokemonSpriteArray } from './interfaces/IEvoChain';
 
 import _ from 'lodash';
-import { IPokemonSpeciesApi } from './interfaces/IPokemonSpeciesApi';
-import { PokemonEncounter } from './interfaces/IPokemonEncounterApi';
 import { elementType } from './interfaces/IElementType';
 
 import { GetAbilities, GetDescription, GetEvoChain, GetGeneration, GetLocation, GetMoves, toTitleCase } from './DataServices/Utilities';
 import { GetTypes } from './DataServices/ImageUtilities';
 import { getlocalStorage, removeFromLocalStorage, saveToLocalStorage } from './DataServices/LocalSotrage';
 import { FavoriteComponentProps } from './interfaces/IFavoriteComponent';
+import { IPokemonEvolutionChainApi } from './interfaces/IPokemonEvolutionChainApi';
+import { IPokemonSpriteArray } from './interfaces/IEvoChain';
 
 function App() {
   const [currentPokemonData, setCurrentPokemonData] = useState<IPokemonApi>()
@@ -100,10 +97,10 @@ function App() {
 
   useEffect(() => {
     const getData = async () => {
-      const pokemonData = await pokemonApi(searchValue);
-      const pokemonSpeciesData = await pokemonSpeciesApi(searchValue);
+      const pokemonData = await pokemonApi(searchValue.toLowerCase());
+      const pokemonSpeciesData = await pokemonSpeciesApi(searchValue.toLowerCase());
       const pokemonEvoChainData = await pokemonEvolutionChainApi(pokemonSpeciesData.evolution_chain.url)
-      const pokemonEncounterData = await pokemonEncounterApi(searchValue)
+      const pokemonEncounterData = await pokemonEncounterApi(searchValue.toLowerCase())
       console.log(pokemonData);
 
       setPokemonEvoChain(await GetEvoChain(pokemonEvoChainData, isShiny))
@@ -174,7 +171,7 @@ function App() {
   }
 
   return (
-    <div className="bg-ash overflow-hidden">
+    <div className="bg-ash overflow-auto">
       <div className="font-content text-white h-full w-full flex flex-col items-center md:px-16 py-8 space-y-5 > *">
         <SearchComponent onChangeHandle={setSearchInput} value={searchInput} searchBtnHandle={searchBtn} randomBtnHandle={randomBtn} favoriteComponentProps={favoriteComponentPropHandles}/>
         <MainCardComponent pokemonImg={pokemonImg} onClickShinyHandle={() => changeShiny()} shiny={shiny} pokemonID={pokemonID} pokemonName={toTitleCase(pokemonName)} onClickHeartHandle={() => changeHeart()} heart={heart} />
