@@ -5,8 +5,17 @@ import {
   Typography,
   IconButton,
 } from "@material-tailwind/react";
+import { getlocalStorage } from "../../DataServices/LocalSotrage";
+import FavoriteComponent from "./FavoriteComponent";
+import { FavoriteComponentProps } from "../../interfaces/IFavoriteComponent";
 
-export function MyDrawer() {
+
+interface MyDrawerProps {
+  favoriteComponentProps:FavoriteComponentProps
+}
+
+
+export function MyDrawer(props:MyDrawerProps) {
   const [open, setOpen] = React.useState(false);
 
   const openDrawer = () => setOpen(true);
@@ -38,27 +47,7 @@ export function MyDrawer() {
           </IconButton>
         </div>
         <div id="favoritesContainer" className="border-black border-b-2">
-          <div className="favoriteExample flex justify-between border-black border-t-2 px-2">
-            <div className="fpokemon">Pikachu</div>
-            <div className="fpokemonId">#25</div>
-            {/* <strong className="exit text-red-600">X</strong> */}
-            <IconButton variant="text" color="blue-gray" onClick={closeDrawer} placeholder={undefined}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="red"
-              className="h-5 w-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </IconButton>
-          </div>
+          <FavoriteComponent onClickDelete={props.favoriteComponentProps.onClickDelete}  onClickSearch={props.favoriteComponentProps.onClickSearch} />
         </div>
 
       </Drawer>

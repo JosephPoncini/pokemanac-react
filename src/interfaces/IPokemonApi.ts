@@ -9,10 +9,6 @@ interface AbilityEntry {
     slot: number;
 }
 
-interface PokemonAbilities {
-    abilities: AbilityEntry[];
-}
-
 interface PokemonCries {
     cries: {
         latest: string;
@@ -25,10 +21,6 @@ interface PokemonForm {
     url: string;
 }
 
-interface PokemonForms {
-    forms: PokemonForm[];
-}
-
 interface Version {
     name: string;
     url: string;
@@ -37,10 +29,6 @@ interface Version {
 interface GameIndex {
     game_index: number;
     version: Version;
-}
-
-interface GameIndices {
-    game_indices: GameIndex[];
 }
 
 interface Move {
@@ -69,10 +57,6 @@ interface MoveEntry {
     version_group_details: VersionGroupDetail[];
 }
 
-interface PokemonMoves {
-    moves: MoveEntry[];
-}
-
 interface Species {
     name: string;
     url: string;
@@ -99,8 +83,8 @@ interface Sprites {
             front_shiny_female: string | null;
         };
         "official-artwork": {
-            front_default: string | null;
-            front_shiny: string | null;
+            front_default: string;
+            front_shiny: string;
         };
         showdown: {
             back_default: string | null;
@@ -276,10 +260,6 @@ interface StatEntry {
     stat: Stat;
 }
 
-interface PokemonStats {
-    stats: StatEntry[];
-}
-
 interface Type {
     name: string;
     url: string;
@@ -289,11 +269,6 @@ interface TypeEntry {
     slot: number;
     type: Type;
 }
-
-interface PokemonTypes {
-    types: TypeEntry[];
-}
-
 
 interface Item {
     name: string;
@@ -313,10 +288,6 @@ interface Item {
   interface HeldItemEntry {
     item: Item;
     version_details: VersionDetail[];
-  }
-  
-  interface PokemonHeldItems {
-    held_items: HeldItemEntry[];
   }
   
   interface Generation {
@@ -339,40 +310,32 @@ interface Item {
     types: TypeEntry[];
   }
   
-  interface PokemonPastTypes {
-    past_types: PastTypeEntry[];
-  }
-  
 
   interface PastAbilityEntry {
     abilities: AbilityEntry[];
     generation: Generation;
   }
-  
-  interface PokemonPastAbilities {
-    past_abilities: PastAbilityEntry[];
-  }
-  
+
   
 export interface IPokemonApi {
-    abilities: PokemonAbilities,
+    abilities: AbilityEntry[],
     base_experience: number,
     cries : PokemonCries,
-    forms: PokemonForms,
-    game_indices : GameIndices,
+    forms: PokemonForm[],
+    game_indices : GameIndex[],
     height : number,
-    held_items : PokemonHeldItems
+    held_items : HeldItemEntry[]
     id: number,
     is_default: boolean,
     location_area_encounters: string,
-    moves: PokemonMoves,
+    moves: MoveEntry[],
     name : string,
     order : number,
-    past_abilities: PokemonPastAbilities,
-    past_types: PokemonPastTypes,
+    past_abilities: PastAbilityEntry[],
+    past_types: PastTypeEntry[],
     species: Species,
     sprites: Sprites,
-    stats : PokemonStats,
-    types : PokemonTypes,
+    stats : StatEntry[],
+    types : TypeEntry[],
     weight : number
 }

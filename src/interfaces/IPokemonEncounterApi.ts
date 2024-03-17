@@ -32,12 +32,8 @@ interface LocationArea {
     version: Version;
   }
   
-  interface PokemonEncounter {
+export interface PokemonEncounter {
     location_area: LocationArea;
     version_details: VersionDetails[];
-  }
-  
-  export interface IPokemonEncounterApi {
-    pokemon_encounters: PokemonEncounter[];
   }
   

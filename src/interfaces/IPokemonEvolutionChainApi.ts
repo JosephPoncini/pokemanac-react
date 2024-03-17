@@ -22,7 +22,7 @@ interface EvolutionDetails {
     turn_upside_down: boolean;
   }
   
-  interface EvolutionChain {
+  export interface EvolutionChain {
     evolution_details: EvolutionDetails[];
     evolves_to: EvolutionChain[];
     is_baby: boolean;

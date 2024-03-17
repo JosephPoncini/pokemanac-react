@@ -8,9 +8,6 @@ interface EggGroup {
     url: string;
 }
 
-interface PokemonEggGroups {
-    egg_groups: EggGroup[];
-}
 
 interface EvolutionChain {
     url: string;
@@ -32,9 +29,6 @@ interface FlavorTextEntry {
     version: Version;
 }
 
-interface PokemonFlavorTexts {
-    flavor_text_entries: FlavorTextEntry[];
-}
 
 interface Language {
     name: string;
@@ -46,9 +40,6 @@ interface GenusEntry {
     language: Language;
 }
 
-interface PokemonGenera {
-    genera: GenusEntry[];
-}
 
 interface Generation {
     name: string;
@@ -70,9 +61,6 @@ interface NameEntry {
     name: string;
 }
 
-interface PokemonNames {
-    names: NameEntry[];
-}
 
 interface Pokedex {
     name: string;
@@ -82,10 +70,6 @@ interface Pokedex {
 interface PokedexNumberEntry {
     entry_number: number;
     pokedex: Pokedex;
-}
-
-interface PokemonPokedexNumbers {
-    pokedex_numbers: PokedexNumberEntry[];
 }
 
 interface Shape {
@@ -101,10 +85,6 @@ interface Pokemon {
 interface VarietyEntry {
     is_default: boolean;
     pokemon: Pokemon;
-}
-
-interface PokemonVarieties {
-    varieties: VarietyEntry[];
 }
 
 interface EvolvesFromSpecies {
@@ -128,9 +108,6 @@ interface PalParkEncounter {
     rate: number;
 }
 
-interface PokemonPalParkEncounters {
-    pal_park_encounters: PalParkEncounter[];
-}
 
 interface Language {
     name: string;
@@ -142,22 +119,18 @@ interface Language {
     language: Language;
   }
   
-  interface PokemonFormDescriptions {
-    form_descriptions: FormDescription[];
-  }
-
 export interface IPokemonSpeciesApi {
     base_happiness: number;
     capture_rate: number;
     color: Color;
-    egg_groups: PokemonEggGroups;
+    egg_groups: EggGroup[];
     evolution_chain: EvolutionChain;
     evolves_from_species: EvolvesFromSpecies;
-    flavor_text_entries: PokemonFlavorTexts;
-    form_descriptions: PokemonFormDescriptions;
+    flavor_text_entries: FlavorTextEntry[];
+    form_descriptions: FormDescription[];
     forms_switchable: boolean;
     gender_rate: number;
-    genera: PokemonGenera;
+    genera: GenusEntry[];
     generation: Generation;
     growth_rate: GrowthRate;
     habitat: Habitat;
@@ -167,10 +140,10 @@ export interface IPokemonSpeciesApi {
     is_baby: boolean;
     is_legendary: boolean;
     is_mythical: boolean;
-    name: PokemonNames;
+    name: NameEntry[];
     order: number;
-    pal_park_encounters: PokemonPalParkEncounters;
-    pokedex_numbers: PokemonPokedexNumbers;
+    pal_park_encounters: PalParkEncounter[];
+    pokedex_numbers: PokedexNumberEntry[];
     shape: Shape;
-    varieties: PokemonVarieties;
+    varieties: VarietyEntry[];
 }
