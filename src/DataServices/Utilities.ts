@@ -5,6 +5,7 @@ import { PokemonEncounter } from "../interfaces/IPokemonEncounterApi";
 import { EvolutionChain, IPokemonEvolutionChainApi } from "../interfaces/IPokemonEvolutionChainApi";
 import { IPokemonSpeciesApi } from "../interfaces/IPokemonSpeciesApi";
 import { pokemonApi } from "./DataServices";
+import DescriptionAndEvolutionsComponent from "../components/DescriptionAndEvolutions/DescriptionAndEvolutionsComponent";
 
 export function toTitleCase(input: string): string {
     return input.toLowerCase().replace(/(?:^|\s)\w/g, (match) => match.toUpperCase());
@@ -22,13 +23,14 @@ export const GetEvoChain = async (evoChainData: IPokemonEvolutionChainApi, isShi
             }
         ]
 
-    const evoChainArray = await GetEvoLine(firstChain, evoChain, 0, 0, isShiny)
+    let previousPokemon: IPokemonSpriteArray = _.cloneDeep(evoChain[evoChain.length - 1]);
+    const evoChainArray = await GetEvoLine(firstChain, evoChain, 0, 0, isShiny, previousPokemon, true)
     evoChainArray.pop();
-    console.log(evoChainArray);
+    // console.log(evoChainArray);
     return evoChainArray;
 }
 
-export const GetEvoLine = async (evoLineData: EvolutionChain, evoChain: IPokemonSpriteArray[], spriteCount: number, arrayCount: number, isShiny: boolean) => {
+export const GetEvoLine = async (evoLineData: EvolutionChain, evoChain: IPokemonSpriteArray[], spriteCount: number, arrayCount: number, isShiny: boolean, previousPokemon: IPokemonSpriteArray, updatePrevious:boolean) => {
 
     //declaring function
     const getSprite = async (name: string, isShiny: boolean) => {
@@ -43,12 +45,23 @@ export const GetEvoLine = async (evoLineData: EvolutionChain, evoChain: IPokemon
         return sprite
     }
 
+    const getIdNumber = (url: string) => {
+        const parts = url.split('/');
+        return parseInt(parts[parts.length - 2]);
+    }
+
     //cloning deep previous pokemon on the chain
-    let previousPokemon: IPokemonSpriteArray = _.cloneDeep(evoChain[evoChain.length - 1]);
+    // let previousPokemon: IPokemonSpriteArray = _.cloneDeep(evoChain[evoChain.length - 1]);
+    if(updatePrevious){
+        previousPokemon = _.cloneDeep(evoChain[evoChain.length - 1]);        
+    }
+
 
     //getting elements needed for sprite
     let name = evoLineData.species.name;
-    let sprite = await getSprite(name, isShiny);
+    let id = getIdNumber(evoLineData.species.url)
+    // console.log(evoLineData);
+    let sprite = await getSprite(`${id}`, isShiny);
 
     //creating the sprite
     let pokemonSprite: IPokemonSprite = {
@@ -62,13 +75,25 @@ export const GetEvoLine = async (evoLineData: EvolutionChain, evoChain: IPokemon
 
 
     let nextChain = evoLineData.evolves_to;
-    if (nextChain.length > 0) { //do we add another sprite to the same line
+    if (nextChain.length > 0) { //do we add another sprite to the same line   
+        //is there going to be a split?
+        let updatePrevious = false;
+        if(nextChain.length > 1){
+            updatePrevious = true;
+        }
         for (const evolution of nextChain) {
-            evoChain = await GetEvoLine(evolution, evoChain, spriteCount + 1, arrayCount, isShiny);
+            // console.log(evolution)
+            evoChain = await GetEvoLine(evolution, evoChain, spriteCount + 1, arrayCount, isShiny, previousPokemon, updatePrevious);
+                
         }
     } else { //or do we start a new evo line
         previousPokemon.arrayKey++;
         evoChain.push(previousPokemon);
+        // console.log("Previous Pokemon:")
+        // previousPokemon.spriteArray.forEach(x => {
+        // console.log(x.name)    
+        // })
+        
     }
     return evoChain;
 }

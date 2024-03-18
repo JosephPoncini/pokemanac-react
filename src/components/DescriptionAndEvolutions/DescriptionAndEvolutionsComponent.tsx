@@ -20,7 +20,7 @@ const DescriptionAndEvolutionsComponent = (props: IDescriptionAndEvolutionsProps
             <div id="evolutionContainer"
                 className="flex flex-col justify-start w-[90vw] md:w-[95%] h-[260px] lg:ml-4 border-2 border-white overflow-y-auto space-y-5 ^ * p-2">
                     {props.EvolutionArray.map(pokemonSpriteArray => {
-                        return <EvolutionLineComponent SpriteArray={pokemonSpriteArray} ClickHandle={props.ClickHandle}  />
+                        return <EvolutionLineComponent key={pokemonSpriteArray.arrayKey} SpriteArray={pokemonSpriteArray} ClickHandle={props.ClickHandle} />
                     })}
 
             </div>

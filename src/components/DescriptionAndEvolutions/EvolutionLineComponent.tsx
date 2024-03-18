@@ -9,6 +9,7 @@ import { IPokemonSpriteArray } from '../../interfaces/IEvoChain';
 interface EvolutionLineComponentProps {
     SpriteArray : IPokemonSpriteArray
     ClickHandle : (search: string) => void
+    key: number
 }
 
 const EvolutionLineComponent = (props: EvolutionLineComponentProps) => {

@@ -15,11 +15,11 @@ const FavoriteComponent = (props: FavoriteComponentProps) => {
 
                 let nameIdArray = favorite.split(",");
                 if (nameIdArray.length > 0) {
-                    console.log(nameIdArray)
+                    // console.log(nameIdArray)
                     let name = nameIdArray[0];
                     let id = nameIdArray[1];
                     return (
-                        <div className="flex justify-between border-black border-t-2 px-2 ">
+                        <div key={id} className="flex justify-between border-black border-t-2 px-2 ">
                             <div className='cursor-pointer flex justify-between items-center w-[87%]'>
                                 <div onClick={() => props.onClickSearch(name)} className=" font-content text-black">{toTitleCase(name)}</div>
                                 <div onClick={() => props.onClickSearch(name)} className=" font-content text-black">#{id}</div>
