@@ -24,7 +24,7 @@ export function MyDrawer(props:MyDrawerProps) {
   return (
     <React.Fragment>
       <button className="redBtn" onClick={openDrawer} >Favorites</button>
-      <Drawer open={open} onClose={closeDrawer} className="p-4" placeholder={undefined}>
+      <Drawer open={open} onClose={closeDrawer} className="p-4" placeholder={undefined} translate="no">
         <div className="mb-6 flex items-center justify-between">
           <Typography className="font-content" variant="h4" color="blue-gray" placeholder={undefined}>
             Favorites

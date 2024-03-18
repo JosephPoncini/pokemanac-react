@@ -6,7 +6,7 @@
 
 // Recreated my pokemon api website using react
 
-// Updates: Fixed the Evo bug so now Wurmple has the right evolutions. Also found a work around for Burmy (3/17/2024 10pm)
+// Updates: Fixed the Evo bug so now Wurmple has the right evolutions. Found a work around for Burmy. Also fixed weird drawer scroll issue (3/17/2024 10pm)
 
 // Peer Review By: Kyle Ma
 

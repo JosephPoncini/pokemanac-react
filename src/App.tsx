@@ -84,11 +84,11 @@ function App() {
     setSearchValue(`${randNum}`);
   }
 
-  const searchUp = (search : string) => {
+  const searchUp = (search: string) => {
     setSearchValue(search)
   }
 
-  const deleteFavorite = (pokemon : string) => {
+  const deleteFavorite = (pokemon: string) => {
     removeFromLocalStorage(pokemon);
     setFavoritesArray(getlocalStorage());
   }
@@ -104,7 +104,7 @@ function App() {
       // console.log(pokemonData);
 
       setPokemonEvoChain(await GetEvoChain(pokemonEvoChainData, isShiny))
-      
+
 
       setCurrentPokemonData(pokemonData);
       setCurrentPokemonEvoData(pokemonEvoChainData);
@@ -142,46 +142,49 @@ function App() {
         }
       }
 
-      if(currentPokemonEvoData){
-        setPokemonEvoChain(await GetEvoChain(currentPokemonEvoData, isShiny))        
+      if (currentPokemonEvoData) {
+        setPokemonEvoChain(await GetEvoChain(currentPokemonEvoData, isShiny))
       }
     }
 
     changeShiny();
-    
+
   }, [isShiny])
 
-  useEffect(()=>{
-      //check Favorites
-      let favorites: string[] = getlocalStorage();
-      if(favorites.includes(pokemonName + "," + pokemonID)){
-        setHeart(heartFilled);
-        setisHeart(true);
-      }else{
-        setHeart(heartEmpty);
-        setisHeart(false);
-      }
-  },[pokemonName])
+  useEffect(() => {
+    //check Favorites
+    let favorites: string[] = getlocalStorage();
+    if (favorites.includes(pokemonName + "," + pokemonID)) {
+      setHeart(heartFilled);
+      setisHeart(true);
+    } else {
+      setHeart(heartEmpty);
+      setisHeart(false);
+    }
+  }, [pokemonName])
 
   useEffect(() => {
-  },[favoritesArray])
+  }, [favoritesArray])
 
-  const favoriteComponentPropHandles:FavoriteComponentProps = {
+  const favoriteComponentPropHandles: FavoriteComponentProps = {
     onClickDelete: deleteFavorite,
     onClickSearch: searchUp
   }
 
   return (
-    <div className="bg-ash overflow-auto">
-      <div className="font-content text-white h-full w-full flex flex-col items-center md:px-16 py-8 space-y-5 > *">
-        <SearchComponent onChangeHandle={setSearchInput} value={searchInput} searchBtnHandle={searchBtn} randomBtnHandle={randomBtn} favoriteComponentProps={favoriteComponentPropHandles}/>
-        <MainCardComponent pokemonImg={pokemonImg} onClickShinyHandle={() => changeShiny()} shiny={shiny} pokemonID={pokemonID} pokemonName={toTitleCase(pokemonName)} onClickHeartHandle={() => changeHeart()} heart={heart} />
-        <div className="flex flex-col  lg:flex-row text-lg md:text-xl px-4  2xl:px-60 space-y-5">
-          <DescriptionAndEvolutionsComponent EvolutionArray={pokemonEvoChain} descriptionText={descriptionText} ClickHandle={searchUp}/>
-          <StatsComponent gen={generationText} elementTypes={types} location={locationText} ability={abilitiesTxt} moves={movesText} />
+
+      <div className="bg-ash h-[100vh] overflow-hidden">
+        <div className="overflow-y-auto font-content text-white h-full w-full flex flex-col items-center md:px-16 py-8 space-y-5 > *">
+          <SearchComponent onChangeHandle={setSearchInput} value={searchInput} searchBtnHandle={searchBtn} randomBtnHandle={randomBtn} favoriteComponentProps={favoriteComponentPropHandles} />
+          <MainCardComponent pokemonImg={pokemonImg} onClickShinyHandle={() => changeShiny()} shiny={shiny} pokemonID={pokemonID} pokemonName={toTitleCase(pokemonName)} onClickHeartHandle={() => changeHeart()} heart={heart} />
+          <div className="flex flex-col  lg:flex-row text-lg md:text-xl px-4  2xl:px-60 space-y-5">
+            <DescriptionAndEvolutionsComponent EvolutionArray={pokemonEvoChain} descriptionText={descriptionText} ClickHandle={searchUp} />
+            <StatsComponent gen={generationText} elementTypes={types} location={locationText} ability={abilitiesTxt} moves={movesText} />
+          </div>
         </div>
       </div>
-    </div>
+
+
 
   );
 }
