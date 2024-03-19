@@ -161,10 +161,8 @@ function App() {
       setHeart(heartEmpty);
       setisHeart(false);
     }
-  }, [pokemonName])
+  }, [pokemonName, favoritesArray])
 
-  useEffect(() => {
-  }, [favoritesArray])
 
   const favoriteComponentPropHandles: FavoriteComponentProps = {
     onClickDelete: deleteFavorite,
